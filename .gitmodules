@@ -1,0 +1,3 @@
+[submodule "jni/SDL"]
+	path = SDL
+	url = https://github.com/SDL-mirror/SDL
