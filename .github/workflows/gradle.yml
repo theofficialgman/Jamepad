@@ -15,6 +15,14 @@ jobs:
     - uses: actions/checkout@v2
       with:
         submodules: 'recursive'
+    - uses: actions/cache@v2
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
     - name: Set up JDK 1.8
       uses: actions/setup-java@v1
       with:
@@ -22,7 +30,7 @@ jobs:
 
     - run: mkdir -p SDL/build-macos64
     # No --disable-video for macOS https://gitweb.gentoo.org/repo/gentoo.git/commit/?id=c70c727c98b24ad8b44e05285b8785be15062af0
-    - run: ../configure CFLAGS="-fPIC" CPPFLAGS="-fPIC" --disable-audio --disable-video-vulkan --disable-render --disable-filesystem --disable-threads --disable-directx --enable-hidapi
+    - run: ../configure CFLAGS="-fPIC" CPPFLAGS="-fPIC" --disable-audio --disable-video-vulkan --disable-render --disable-filesystem --disable-threads --disable-directx --disable-mmx --disable-3dnow --disable-sse --disable-sse2 --disable-sse3 --disable-cpuinfo --disable-sensor --enable-hidapi
       working-directory: SDL/build-macos64
     - run: make -j
       working-directory: SDL/build-macos64
@@ -49,6 +57,14 @@ jobs:
     - uses: actions/checkout@v2
       with:
         submodules: 'recursive'
+    - uses: actions/cache@v2
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
     - name: Set up JDK 1.8
       uses: actions/setup-java@v1
       with:
@@ -80,37 +96,37 @@ jobs:
     - run: sed -i 's/#define SDL_DYNAMIC_API 1/#define SDL_DYNAMIC_API 0/' SDL/src/dynapi/SDL_dynapi.h
 
     - run: mkdir -p SDL/build-linux64
-    - run: ../configure CFLAGS="-fPIC" CPPFLAGS="-fPIC" --disable-audio --disable-video --disable-video-vulkan --disable-render --disable-filesystem --disable-threads --disable-directx --enable-hidapi
+    - run: ../configure CFLAGS="-fPIC" CPPFLAGS="-fPIC" --disable-audio --disable-video --disable-video-vulkan --disable-render --disable-filesystem --disable-threads --disable-directx --disable-mmx --disable-3dnow --disable-sse --disable-sse2 --disable-sse3 --disable-cpuinfo --disable-sensor --enable-hidapi
       working-directory: SDL/build-linux64
     - run: make -j
       working-directory: SDL/build-linux64
 
     - run: mkdir -p SDL/build-linux32
-    - run: ../configure CFLAGS="-fPIC -m32" CPPFLAGS="-fPIC -m32" LDFLAGS="-m32" --disable-audio --disable-video --disable-video-vulkan --disable-render --disable-filesystem --disable-threads --disable-directx --enable-hidapi
+    - run: ../configure CFLAGS="-fPIC -m32" CPPFLAGS="-fPIC -m32" LDFLAGS="-m32" --disable-audio --disable-video --disable-video-vulkan --disable-render --disable-filesystem --disable-threads --disable-directx --disable-mmx --disable-3dnow --disable-sse --disable-sse2 --disable-sse3 --disable-cpuinfo --disable-sensor --enable-hidapi
       working-directory: SDL/build-linux32
     - run: make -j
       working-directory: SDL/build-linux32
 
     - run: mkdir -p SDL/build-linuxarm32
-    - run: ../configure --host=arm-linux-gnueabihf CFLAGS="-fPIC" CPPFLAGS="-fPIC" --disable-audio --disable-video --disable-video-vulkan --disable-render --disable-filesystem --disable-threads --disable-directx --enable-hidapi
+    - run: ../configure --host=arm-linux-gnueabihf CFLAGS="-fPIC" CPPFLAGS="-fPIC" --disable-audio --disable-video --disable-video-vulkan --disable-render --disable-filesystem --disable-threads --disable-directx --disable-mmx --disable-3dnow --disable-sse --disable-sse2 --disable-sse3 --disable-cpuinfo --disable-sensor --enable-hidapi
       working-directory: SDL/build-linuxarm32
     - run: make -j
       working-directory: SDL/build-linuxarm32
 
     - run: mkdir -p SDL/build-linuxarm64
-    - run: ../configure --host=aarch64-linux-gnu CFLAGS="-fPIC" CPPFLAGS="-fPIC" --disable-audio --disable-video --disable-video-vulkan --disable-render --disable-filesystem --disable-threads --disable-directx --enable-hidapi
+    - run: ../configure --host=aarch64-linux-gnu CFLAGS="-fPIC" CPPFLAGS="-fPIC" --disable-audio --disable-video --disable-video-vulkan --disable-render --disable-filesystem --disable-threads --disable-directx --disable-mmx --disable-3dnow --disable-sse --disable-sse2 --disable-sse3 --disable-cpuinfo --disable-sensor --enable-hidapi
       working-directory: SDL/build-linuxarm64
     - run: make -j
       working-directory: SDL/build-linuxarm64
 
     - run: mkdir -p SDL/build-windows32
-    - run: ../configure --host=i686-w64-mingw32 --disable-audio --disable-video --disable-video-vulkan --disable-render --disable-filesystem --disable-threads --disable-directx --enable-hidapi
+    - run: ../configure --host=i686-w64-mingw32 --disable-audio --disable-video --disable-video-vulkan --disable-render --disable-filesystem --disable-threads --disable-directx --disable-mmx --disable-3dnow --disable-sse --disable-sse2 --disable-sse3 --disable-cpuinfo --disable-sensor --enable-hidapi
       working-directory: SDL/build-windows32
     - run: make -j
       working-directory: SDL/build-windows32
 
     - run: mkdir -p SDL/build-windows64
-    - run: ../configure --host=x86_64-w64-mingw32 --disable-audio --disable-video --disable-video-vulkan --disable-render --disable-filesystem --disable-threads --disable-directx --enable-hidapi
+    - run: ../configure --host=x86_64-w64-mingw32 --disable-audio --disable-video --disable-video-vulkan --disable-render --disable-filesystem --disable-threads --disable-directx --disable-mmx --disable-3dnow --disable-sse --disable-sse2 --disable-sse3 --disable-cpuinfo --disable-sensor --enable-hidapi
       working-directory: SDL/build-windows64
     - run: make -j
       working-directory: SDL/build-windows64
