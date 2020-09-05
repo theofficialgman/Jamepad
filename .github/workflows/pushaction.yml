@@ -1,4 +1,4 @@
-name: Java CI with Gradle
+name: Compile and commit natives
 
 on:
   push:
@@ -140,3 +140,13 @@ jobs:
       with:
         name: output-libs
         path: build/libs/
+    - name: Commit natives
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add libs/*
+        git commit -m "Add changes" -a
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
