@@ -1,12 +1,10 @@
-Note: I'm still maintaining Jamepad and try to keep it working but any new features will go into [sdl2gdx](https://github.com/electronstudio/sdl2gdx)
-
 # Jamepad
 
-#### A better way to use gamepads in Java
+#### A better way to use gamepads in Java. This is a fork of the original repository because it was discontinued.
+
+See releases page for other changes done.
 
 Jamepad is a library for using gamepads in Java. It's based on SDL2 ([here](https://www.libsdl.org/)) and uses jnigen ([more info here](https://github.com/libgdx/libgdx/wiki/jnigen)). We also use [this](https://github.com/gabomdq/SDL_GameControllerDB) really nice database of gamepad mappings.
-
-Other gamepad libraries are missing stuff developers need. For most libraries, Xbox 360 controllers on windows are not properly supported. The libraries that do support Xbox 360 controllers are not cross platform. On some, hotplugging controllers is not supported.
 
 Jamepad has:
   - One library that supports all platforms (Windows, OSX, and Linux)
@@ -15,6 +13,10 @@ Jamepad has:
   - Support for rumble
   - Button/Axis mappings for popular controllers.
   - A permissive license. You can include this use this library in proprietary projects without sharing source.
+
+This fork improved the following points compared to last real Jamepad version 1.3.2:
+* This fork builts the native library on Github Actions.
+* You can see all the magic happen there. Moreover, if you fork this repo and adjust settings, you are immediately ready to go with your own build! We are open for PRs though.
 
 #### Stuff You Should Know About Jamepad
 
@@ -28,15 +30,6 @@ Jamepad has:
 #### Current Limitations
 - The order of gamepads on Windows is not necessarily the order they were plugged in. XInput controllers will always appear before DirectInput controllers, regardless of when they were plugged in. This means that the player numbers associated with each controller can change unexpectedly if XInput controllers are plugged in or disconnected while DirectInput controllers are present.
 - If using getState() in ControllerManager, a new ControllerState is instantiated on each call. For some games, this could pose a problem.
-- For now, when we build SDL, the  dynamic API stuff is disabled. This seems bad and should probably change. I just don't know how to get it to work through JNI with that stuff enabled.
-
-#### Latest changes in 1.3
-
-* Uses new rumble API and depreciates the old haptics API.
-* Based on SDL 2.0.9
-* Changes to build system.
-* Remove Mac32 and Lin32 builds.
-* Creating portable binaries for Linux is a minefield at the best of times so we need to do some testing on different Linux distros to make sure they work.
 
 
 
@@ -56,7 +49,7 @@ Next, add this line to your dependencies section. Update the version number to w
 ````
 dependencies {
   ...
-  compile 'com.github.WilliamAHartman:Jamepad:1.3.2'
+  compile 'com.github.MrStahlfelge:Jamepad:2.0.12.0'
 }
 ````
 ##### maven
@@ -75,14 +68,12 @@ Next, add this line to your dependencies section. Update the version number to w
 <dependencies>
     ...
     <dependency>
-        <groupId>com.github.WilliamAHartman</groupId>
+        <groupId>com.github.MrStahlfelge</groupId>
         <artifactId>Jamepad</artifactId>
-        <version>1.3.2</version>
+        <version>2.0.12.0</version>
     </dependency>
 </dependencies>
 ````
-##### jar
-If you aren't using gradle, just download the .jar file from the releases section and add it to your project as usual.
 
 #### Using Jamepad
 There are two main ways to use Jamepad. Both rely on a ControllerManager Object.

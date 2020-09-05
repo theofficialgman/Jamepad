@@ -1,5 +1,12 @@
 ## Building Jamepad
 
+Jamepad is built on Github Actions. Take a look at the workflow files to see what's happening.
+
+If you need to built locally, follow the steps taken there.
+
+
+Now following is the old manual approach_
+
 1.  Clone the repo on Linux.  Run `./gradlew linuxNatives`
 2.  The binaries for Windows are cross-compiled and so also need to be built on Linux (or MacOS).  Run `./gradlew windowsNatives`
 3.  Clone the repo on a mac. Copy the files you just built (from the `libs` folder) to the mac.
