@@ -1,5 +1,7 @@
 package com.studiohartman.jamepad;
 
+import com.badlogic.gdx.utils.SharedLibraryLoader;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -59,7 +61,7 @@ public class ControllerManager {
         isInitialized = false;
         controllers = new ControllerIndex[maxNumControllers];
 
-//        new JniGenSharedLibraryLoader().load("jamepad");
+        new SharedLibraryLoader().load("jamepad");
     }
 
     /**
