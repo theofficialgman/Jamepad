@@ -242,6 +242,30 @@ public final class ControllerIndex {
     */
 
     /**
+     * @return player index if set and supported, -1 otherwise
+     */
+    public int getPlayerIndex() throws ControllerUnpluggedException {
+        ensureConnected();
+        return nativeGetPlayerIndex(controllerPtr);
+    }
+
+    private native int nativeGetPlayerIndex(long controllerPtr); /*
+        SDL_GameController* pad = (SDL_GameController*) controllerPtr;
+        return SDL_GameControllerGetPlayerIndex(pad);
+    */
+
+    private void setPlayerIndex(int index) throws ControllerUnpluggedException {
+        ensureConnected();
+        // looks like SDL doesn't really change something here for Windows, Linux and Mac
+        nativeSetPlayerIndex(controllerPtr, index);
+    }
+
+    private native void nativeSetPlayerIndex(long controllerPtr, int index); /*
+        SDL_GameController* pad = (SDL_GameController*) controllerPtr;
+        return SDL_GameControllerSetPlayerIndex(pad, index);
+    */
+
+    /**
      * Convenience method to throw an exception if the controller is not connected.
      */
     private void ensureConnected() throws ControllerUnpluggedException {
