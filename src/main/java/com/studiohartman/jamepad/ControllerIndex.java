@@ -255,8 +255,8 @@ public final class ControllerIndex {
     */
 
     /**
-     * Sets player index, if possible. At the time being, this doesn't seem to be supported on
-     * Windows, Linux and Mac by SDL
+     * Sets player index. At the time being, this doesn't seem to change the indication lights on
+     * a controller on Windows, Linux and Mac, but only an internal representation index.
      * @param index
      */
     public void setPlayerIndex(int index) throws ControllerUnpluggedException {
