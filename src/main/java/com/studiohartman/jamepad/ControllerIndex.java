@@ -254,9 +254,13 @@ public final class ControllerIndex {
         return SDL_GameControllerGetPlayerIndex(pad);
     */
 
-    private void setPlayerIndex(int index) throws ControllerUnpluggedException {
+    /**
+     * Sets player index, if possible. At the time being, this doesn't seem to be supported on
+     * Windows, Linux and Mac by SDL
+     * @param index
+     */
+    public void setPlayerIndex(int index) throws ControllerUnpluggedException {
         ensureConnected();
-        // looks like SDL doesn't really change something here for Windows, Linux and Mac
         nativeSetPlayerIndex(controllerPtr, index);
     }
 
