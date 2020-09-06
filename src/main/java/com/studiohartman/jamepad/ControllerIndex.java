@@ -209,14 +209,7 @@ public final class ControllerIndex {
     public float getAxisState(ControllerAxis toCheck) throws ControllerUnpluggedException {
         ensureConnected();
 
-        float toReturn;
-
-        //Note: we flip the Y values so up on the stick is positive. that makes more sense.
-        if(toCheck == ControllerAxis.LEFTY || toCheck == ControllerAxis.RIGHTY) {
-            toReturn = nativeCheckAxis(controllerPtr, toCheck.ordinal()) / -AXIS_MAX_VAL;
-        } else {
-            toReturn = nativeCheckAxis(controllerPtr, toCheck.ordinal()) / AXIS_MAX_VAL;
-        }
+        float toReturn = nativeCheckAxis(controllerPtr, toCheck.ordinal()) / AXIS_MAX_VAL;
 
         return toReturn;
     }
