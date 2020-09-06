@@ -2,7 +2,9 @@ name: Compile and commit natives
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master
+      - sdl/**
   pull_request:
     branches: [ master ]
 env:
