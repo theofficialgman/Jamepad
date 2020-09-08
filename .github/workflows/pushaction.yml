@@ -142,14 +142,3 @@ jobs:
       with:
         name: output-libs
         path: build/libs/
-    - name: Commit natives
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add libs/*
-        git commit -m "Update natives" -a
-    - name: Push changed natives
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: ${{ github.head_ref }}
