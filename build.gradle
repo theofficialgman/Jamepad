@@ -41,11 +41,11 @@ ext {
     }
 
     getRepositoryUsername = {
-        return project.hasProperty('NEXUS_USERNAME') ? NEXUS_USERNAME : ""
+        return project.hasProperty('NEXUS_USERNAME') ? NEXUS_USERNAME : "$System.env.NEXUS_USERNAME"
     }
 
     getRepositoryPassword = {
-        return project.hasProperty('NEXUS_PASSWORD') ? NEXUS_PASSWORD : ""
+        return project.hasProperty('NEXUS_PASSWORD') ? NEXUS_PASSWORD : "$System.env.NEXUS_PASSWORD"
     }
 }
 
