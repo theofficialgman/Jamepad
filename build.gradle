@@ -148,12 +148,15 @@ jnigen {
     }
 }
 
+jar {
+    baseName = "jamepad"
+    from fileTree("libs").files
+}
+
 dependencies {
     testImplementation "com.badlogicgames.gdx:gdx:$gdxVersion"
     testImplementation "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
 }
-
-
 
 
 apply from: 'publish.gradle'
