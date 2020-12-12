@@ -142,3 +142,6 @@ jobs:
       with:
         name: output-libs
         path: build/libs/
+    - name: Snapshot build deploy
+      run:
+        ./gradlew build publish
