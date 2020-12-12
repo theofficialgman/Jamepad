@@ -5,6 +5,7 @@ afterEvaluate { project ->
     publishing {
         publications {
             mavenJava(MavenPublication) {
+                artifactId = "jamepad"
                 from components.java
                 versionMapping {
                     usage('java-api') {
