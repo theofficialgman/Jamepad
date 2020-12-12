@@ -1,8 +1,8 @@
-# Jamepad
+# Jamepad Fork
 
-#### A better way to use gamepads in Java. This is a fork of the original repository because it was discontinued.
+#### A better way to use gamepads in Java.
 
-See releases page for other changes done.
+*This is a fork of and based on the [original work by William Hartman](https://github.com/williamahartman/Jamepad/tree/ae170a95eb7c14d82b19328480b1ab5a45b77001)*.
 
 Jamepad is a library for using gamepads in Java. It's based on SDL2 ([here](https://www.libsdl.org/)) and uses jnigen ([more info here](https://github.com/libgdx/libgdx/wiki/jnigen)). We also use [this](https://github.com/gabomdq/SDL_GameControllerDB) really nice database of gamepad mappings.
 
@@ -12,21 +12,20 @@ Jamepad has:
   - Support for plugging/unplugging controllers at runtime.
   - Support for rumble
   - Button/Axis mappings for popular controllers.
-  - A permissive license. You can include this use this library in proprietary projects without sharing source.
+  - A permissive license (see below).
 
-This fork improved the following points compared to last real Jamepad version 1.3.2:
-* This fork builts the native library on Github Actions.
-* You can see all the magic happen there. Moreover, if you fork this repo and adjust settings, you are immediately ready to go with your own build! We are open for PRs though.
+This fork improved the following points compared to last real [Jamepad version 1.3.2](https://github.com/williamahartman/Jamepad/tree/ae170a95eb7c14d82b19328480b1ab5a45b77001):
+* This fork builts the native library on Github Actions. You can see all the magic happen there. Moreover, if you fork this repo and adjust settings, you are immediately ready to go with your own build! We are open for PRs though.
+* New features added, newer SDL version used
+* Natives are smaller in size
+* Natives for arm architecture included
 
 #### Stuff You Should Know About Jamepad
 
 - On Windows (only 7 and up were tested), no special dependencies are needed.
-- On Linux, runtime dependencies are:
-  - libevdev
-  - libudev
+- On Linux, runtime dependencies are: libevdev, libudev (normally included)
 - On OS X, no special dependencies are needed
-  - If you want to use Xbox controllers, you need separate drivers for them. The ones [here](https://github.com/360Controller/360Controller) have been tested with Jamepad and work properly.
-  
+
 #### Current Limitations
 - The order of gamepads on Windows is not necessarily the order they were plugged in. XInput controllers will always appear before DirectInput controllers, regardless of when they were plugged in. This means that the player numbers associated with each controller can change unexpectedly if XInput controllers are plugged in or disconnected while DirectInput controllers are present.
 - If using getState() in ControllerManager, a new ControllerState is instantiated on each call. For some games, this could pose a problem.
@@ -34,6 +33,9 @@ This fork improved the following points compared to last real Jamepad version 1.
 
 
 ## Using Jamepad
+
+For usage within libgdx project, take a look at [gdx-controllers](https://github.com/libgdx/gdx-controllers).
+The following information is only needed for non-gdx Java projects.
 
 ### Getting Jamepad
 
@@ -140,3 +142,13 @@ controllers.quitSDLGamepad();
 ## Building Jamepad
 
 See [BUILDING](BUILDING.md)
+
+## License
+
+The original work by William Hartman is licensed under the permissive zLib license.
+You can include this use this library in proprietary projects without sharing source, and you are allowed to alter the project.
+The original license is kept [here](LICENSE_hartman.txt).
+
+libSDL 2.0 is [zLib licensed](https://libsdl.org/license.php), too.
+
+Every work done in this fork is licensed under Apache 2 License conditions, see LICENSE file.
