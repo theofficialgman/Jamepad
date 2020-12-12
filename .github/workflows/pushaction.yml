@@ -1,4 +1,4 @@
-name: Compile and commit natives
+name: Compile and deploy snapshot artifacts
 
 on:
   push:
@@ -143,5 +143,8 @@ jobs:
         name: output-libs
         path: build/libs/
     - name: Snapshot build deploy
+      env:
+        NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
+        NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
       run:
         ./gradlew build publish
