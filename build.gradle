@@ -49,6 +49,11 @@ ext {
     }
 }
 
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
 version project.getProperty('version') + (isReleaseBuild() ? "" : "-SNAPSHOT")
 
 dependencies {
