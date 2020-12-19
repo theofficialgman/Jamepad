@@ -26,6 +26,13 @@ afterEvaluate { project ->
                             distribution = POM_LICENCE_DIST
                         }
                     }
+                    developers {
+                        developer {
+                            id = "Tomski"
+                            name = "Tom Wojciechowski"
+                            email = "tomwojciechowski@asidik.com"
+                        }
+                    }
                     scm {
                         connection = POM_SCM_CONNECTION
                         developerConnection = POM_SCM_DEV_CONNECTION
@@ -57,7 +64,7 @@ afterEvaluate { project ->
     //Simply using "required" in signing block doesn't work because taskGraph isn't ready yet.
     gradle.taskGraph.whenReady {
         tasks.withType(Sign) {
-            onlyIf { isReleaseBuild() && gradle.taskGraph.hasTask("publish") }
+            onlyIf { isReleaseBuild() }
         }
     }
 }
