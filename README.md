@@ -40,39 +40,24 @@ The following information is only needed for non-gdx Java projects.
 ### Getting Jamepad
 
 ##### gradle
-If you use gradle, you can pull this package in from jitpack.  First, add jitpack to your repositories section:
-````
-repositories {
-  ...
-  maven { url "https://jitpack.io" }
-}
-````
-Next, add this line to your dependencies section. Update the version number to whatever the latest release is.
+If you use gradle, you can pull this package in from Maven Central.
+Add this line to your dependencies section. Update the version number to whatever the latest release is.
 ````
 dependencies {
   ...
-  compile 'com.github.MrStahlfelge:Jamepad:2.0.12.0'
+  compile 'com.badlogicgames.jamepad:jamepad:2.0.12.1'
 }
 ````
 ##### maven
-If you use maven, you can pull this package in from jitpack.  First, add jitpack to your repositories section:
-````
-<repositories>
-    ...
-    <repository>
-        <id>jitpack.io</id>
-        <url>https://jitpack.io</url>
-    </repository>
-</repositories>
-````
-Next, add this line to your dependencies section. Update the version number to whatever the latest release is.
+If you use gradle, you can pull this package in from Maven Central.
+Add this line to your dependencies section. Update the version number to whatever the latest release is.
 ````
 <dependencies>
     ...
     <dependency>
-        <groupId>com.github.MrStahlfelge</groupId>
-        <artifactId>Jamepad</artifactId>
-        <version>2.0.12.0</version>
+        <groupId>com.badlogicgames.jamepad</groupId>
+        <artifactId>jamepad</artifactId>
+        <version>2.0.12.1</version>
     </dependency>
 </dependencies>
 ````
