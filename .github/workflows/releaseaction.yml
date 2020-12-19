@@ -1,4 +1,4 @@
-name: Compile and deploy snapshot artifacts
+name: Compile and deploy release artifacts
 
 on:
   release:
@@ -48,7 +48,7 @@ jobs:
 
   linux:
     needs: macos
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-latest
     env:
       ORG_GRADLE_PROJECT_GITHUB_USERNAME: ""
       ORG_GRADLE_PROJECT_GITHUB_API_TOKEN: ""
@@ -145,7 +145,7 @@ jobs:
       with:
         gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
         passphrase: ${{ secrets.GPG_PASSPHRASE }}
-    - name: Snapshot build deploy
+    - name: Release build deploy
       env:
         NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
         NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
