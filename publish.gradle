@@ -58,6 +58,7 @@ afterEvaluate { project ->
     }
 
     signing {
+        useGpgCmd()
         sign publishing.publications.mavenJava
     }
 
