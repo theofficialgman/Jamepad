@@ -37,10 +37,8 @@ jobs:
       env:
         NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
         NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
-        SIGNING_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-        SIGNING_GPG_KEYID: ${{ secrets.GPG_KEYID }}
       run:
-        ./gradlew build publish -PRELEASE -Psigning.password="$SIGNING_GPG_PASSPHRASE" -Psigning.keyId="$SIGNING_GPG_KEYID"
+        ./gradlew build publish -PRELEASE -Psigning.keyId=${{ secrets.GPG_KEYID }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }} -Psigning.secretKeyRingFile=$(echo ~/.gradle/secring.gpg)
 
 
     - run: mkdir -p SDL/build-macos64
