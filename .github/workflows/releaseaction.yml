@@ -149,5 +149,7 @@ jobs:
       env:
         NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
         NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
+        SIGNING_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+        SIGNING_GPG_KEYID: ${{ secrets.GPG_KEYID }}
       run:
-        ./gradlew build publish -PRELEASE
+        ./gradlew build publish -PRELEASE -Psigning.secretKeyRingFile="~/.gnupg/secring.gpg" -Psigning.password="$SIGNING_GPG_PASSPHRASE" -Psigning.keyId="$SIGNING_GPG_KEYID"
