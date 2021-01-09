@@ -103,6 +103,8 @@ public class ControllerManager {
             return JNI_FALSE;
         }
 
+        SDL_SetHint(SDL_HINT_JOYSTICK_RAWINPUT, SDL_FALSE);
+
         //We don't want any controller connections events (which are automatically generated at init)
         //since they interfere with us detecting new controllers, so we go through all events and clear them.
         while (SDL_PollEvent(&event));
