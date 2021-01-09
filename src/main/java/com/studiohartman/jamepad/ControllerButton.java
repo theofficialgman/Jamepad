@@ -30,4 +30,10 @@ public enum ControllerButton {
     DPAD_DOWN,
     DPAD_LEFT,
     DPAD_RIGHT,
+    BUTTON_MISC1,    /* Xbox Series X share button, PS5 microphone button, Nintendo Switch Pro capture button */
+    BUTTON_PADDLE1,  /* Xbox Elite paddle P1 */
+    BUTTON_PADDLE2,  /* Xbox Elite paddle P3 */
+    BUTTON_PADDLE3,  /* Xbox Elite paddle P2 */
+    BUTTON_PADDLE4,  /* Xbox Elite paddle P4 */
+    BUTTON_TOUCHPAD, /* PS4/PS5 touchpad button */
 }
