@@ -48,7 +48,7 @@ Add this line to your dependencies section. Update the version number to whateve
 ````
 dependencies {
   ...
-  compile 'com.badlogicgames.jamepad:jamepad:2.0.12.1'
+  compile 'com.badlogicgames.jamepad:jamepad:2.0.14.0'
 }
 ````
 ##### maven
@@ -60,7 +60,7 @@ Add this line to your dependencies section. Update the version number to whateve
     <dependency>
         <groupId>com.badlogicgames.jamepad</groupId>
         <artifactId>jamepad</artifactId>
-        <version>2.0.12.1</version>
+        <version>2.0.14.0</version>
     </dependency>
 </dependencies>
 ````
