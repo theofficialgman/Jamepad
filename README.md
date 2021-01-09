@@ -39,6 +39,9 @@ The following information is only needed for non-gdx Java projects.
 
 ### Getting Jamepad
 
+[![Sonatype Nexus (Releases)](https://img.shields.io/nexus/r/com.badlogicgames.jamepad/jamepad?nexusVersion=2&server=https%3A%2F%2Foss.sonatype.org&label=release)](https://search.maven.org/artifact/com.badlogicgames.jamepad/jamepad)
+[![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/com.badlogicgames.jamepad/jamepad?server=https%3A%2F%2Foss.sonatype.org&label=snapshot)](https://oss.sonatype.org/#nexus-search;gav~com.badlogicgames.jamepad~jamepad)
+
 ##### gradle
 If you use gradle, you can pull this package in from Maven Central.
 Add this line to your dependencies section. Update the version number to whatever the latest release is.

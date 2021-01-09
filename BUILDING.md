@@ -2,6 +2,17 @@
 
 Jamepad is built on Github Actions. Take a look at the workflow files to see what's happening.
 
+Updating SDL version submodule to a new version:
+
+```
+cd SDL
+git checkout release-x.x.x
+cd..
+git add SDL
+git commit -m "Update to SDL x.x.x"
+git push
+```
+
 If you need to built locally, follow the steps taken there.
 
 
