@@ -98,12 +98,12 @@ public class ControllerManager {
         }
     }
     private native boolean nativeInitSDLGamepad(); /*
+        SDL_SetHint(SDL_HINT_JOYSTICK_RAWINPUT, "0");
+
         if (SDL_Init(SDL_INIT_EVENTS | SDL_INIT_JOYSTICK | SDL_INIT_GAMECONTROLLER) != 0) {
             printf("NATIVE METHOD: SDL_Init failed: %s\n", SDL_GetError());
             return JNI_FALSE;
         }
-
-        SDL_SetHint(SDL_HINT_JOYSTICK_RAWINPUT, SDL_FALSE);
 
         //We don't want any controller connections events (which are automatically generated at init)
         //since they interfere with us detecting new controllers, so we go through all events and clear them.
