@@ -164,9 +164,11 @@ public class ControllerManager {
      * the controller at that index doesn't support haptics, or if there is no controller at that index),
      * this method will return false.
      *
+     * Each call to this function cancels any previous rumble effect, and calling it with 0 intensity stops any rumbling.
+     *
      * @param index The index of the controller that will be vibrated
-     * @param leftMagnitude The magnitude the left vibration motor will be set to
-     * @param rightMagnitude The magnitude the right vibration motor will be set to
+     * @param leftMagnitude The intensity of the left rumble motor (0-1)
+     * @param rightMagnitude The intensity of the rught rumble motor (0-1)
      * @return Whether or not vibration was successfully started
      * @throws IllegalStateException if Jamepad was not initialized
      */
@@ -182,36 +184,6 @@ public class ControllerManager {
         }
 
         return false;
-    }
-
-    /**
-     * Use doVibration instead
-     *
-     * @deprecated Hatpics replaced by new rumble API, use doVibrarion instead
-     * @param index The index of the controller that will be vibrated
-     * @param leftMagnitude The magnitude the left vibration motor will be set to
-     * @param rightMagnitude The magnitude the right vibration motor will be set to
-     * @return Whether or not vibration was successfully started
-     * @throws IllegalStateException if Jamepad was not initialized
-     */
-    @Deprecated
-    public boolean startVibration(int index, float leftMagnitude, float rightMagnitude) throws IllegalStateException {
-        return doVibration(index, leftMagnitude, rightMagnitude, 1000);
-    }
-
-    /**
-     * Does nothing
-     *
-     * @deprecated  new rumble API does not need this
-     * @param index The index of the controller whose vibration effects will be stopped
-     */
-    @Deprecated
-    public void stopVibration(int index) {
-        verifyInitialized();
-
-        if(index < controllers.length && index >= 0) {
-            controllers[index].stopVibration();
-        }
     }
 
     /**

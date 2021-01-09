@@ -108,20 +108,6 @@ public final class ControllerIndex {
     }
 
 
-    /**
-     * Start vibrating the controller.
-     *
-     * @deprecated use doVibration instead
-     * @param leftMagnitude The speed for the left motor to vibrate (this should be between 0 and 1)
-     * @param rightMagnitude The speed for the right motor to vibrate (this should be between 0 and 1)
-     * @return Whether or not the controller was able to be vibrated (i.e. if haptics are supported)
-     * @throws ControllerUnpluggedException If the controller is not connected
-     */
-    @Deprecated
-    public boolean startVibration(float leftMagnitude, float rightMagnitude) throws ControllerUnpluggedException {
-        return doVibration(leftMagnitude,rightMagnitude , 1000);
-    }
-
     private native boolean nativeDoVibration(long controllerPtr, int leftMagnitude, int rightMagnitude, int duration_ms); /*
         SDL_Joystick* joystick = SDL_GameControllerGetJoystick((SDL_GameController*) controllerPtr);
         return SDL_JoystickRumble(joystick, leftMagnitude, rightMagnitude,  duration_ms) == 0;
@@ -129,12 +115,14 @@ public final class ControllerIndex {
 
     /**
      * Vibrate the controller using the new rumble API
+     * Each call to this function cancels any previous rumble effect, and calling it with 0 intensity stops any rumbling.
+     *
      * This will return false if the controller doesn't support vibration or if SDL was unable to start
      * vibration (maybe the controller doesn't support left/right vibration, maybe it was unplugged in the
      * middle of trying, etc...)
      *
-     * @param leftMagnitude The speed for the left motor to vibrate (this should be between 0 and 1)
-     * @param rightMagnitude The speed for the right motor to vibrate (this should be between 0 and 1)
+     * @param leftMagnitude The intensity of the left rumble motor (this should be between 0 and 1)
+     * @param rightMagnitude The intensity of the right rumble motor (this should be between 0 and 1)
      * @return Whether or not the controller was able to be vibrated (i.e. if haptics are supported)
      * @throws ControllerUnpluggedException If the controller is not connected
      */
@@ -149,14 +137,6 @@ public final class ControllerIndex {
         }
 
         return nativeDoVibration(controllerPtr, (int) (65535 * leftMagnitude), (int) (65535 * rightMagnitude), duration_ms);
-    }
-
-    /**
-     * Does nothing
-     * @deprecated not needed by new rumble API
-     */
-    @Deprecated
-    public void stopVibration() {
     }
 
     /**
