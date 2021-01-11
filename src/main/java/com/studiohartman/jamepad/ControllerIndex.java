@@ -173,10 +173,27 @@ public final class ControllerIndex {
         justPressedButtons[buttonIndex] = (currButtonIsPressed && !heldDownButtons[buttonIndex]);
         heldDownButtons[buttonIndex] = currButtonIsPressed;
     }
+
     private native boolean nativeCheckButton(long controllerPtr, int buttonIndex); /*
         SDL_GameControllerUpdate();
         SDL_GameController* pad = (SDL_GameController*) controllerPtr;
         return SDL_GameControllerGetButton(pad, (SDL_GameControllerButton) buttonIndex);
+    */
+
+    /**
+     * Returns if a given button is available on controller.
+     *
+     * @param toCheck The ControllerButton to check
+     * @throws ControllerUnpluggedException If the controller is not connected
+     */
+    public boolean isButtonAvailable(ControllerButton toCheck) throws ControllerUnpluggedException {
+        ensureConnected();
+        return nativeButtonAvailable(controllerPtr, toCheck.ordinal());
+    }
+
+    private native boolean nativeButtonAvailable(long controllerPtr, int buttonIndex); /*
+        SDL_GameController* pad = (SDL_GameController*) controllerPtr;
+        return SDL_GameControllerHasButton(pad, (SDL_GameControllerButton) buttonIndex);
     */
 
     /**
@@ -191,10 +208,27 @@ public final class ControllerIndex {
 
         return nativeCheckAxis(controllerPtr, toCheck.ordinal()) / AXIS_MAX_VAL;
     }
+
     private native int nativeCheckAxis(long controllerPtr, int axisIndex); /*
         SDL_GameControllerUpdate();
         SDL_GameController* pad = (SDL_GameController*) controllerPtr;
         return SDL_GameControllerGetAxis(pad, (SDL_GameControllerAxis) axisIndex);
+    */
+
+    /**
+     * Returns if passed axis is available on controller.
+     *
+     * @param toCheck The ControllerAxis to check
+     * @throws ControllerUnpluggedException If the controller is not connected
+     */
+    public boolean isAxisAvailable(ControllerAxis toCheck) throws ControllerUnpluggedException {
+        ensureConnected();
+        return nativeAxisAvailable(controllerPtr, toCheck.ordinal());
+    }
+
+    private native boolean nativeAxisAvailable(long controllerPtr, int axisIndex); /*
+        SDL_GameController* pad = (SDL_GameController*) controllerPtr;
+        return SDL_GameControllerHasAxis(pad, (SDL_GameControllerAxis) axisIndex);
     */
 
     /**
