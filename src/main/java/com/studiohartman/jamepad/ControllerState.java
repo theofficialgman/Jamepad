@@ -237,6 +237,37 @@ public final class ControllerState implements Serializable {
     public final boolean dpadRightJustPressed;
 
     /**
+     * Xbox Series X share button, PS5 microphone button, Nintendo Switch Pro capture button
+     */
+    public final boolean misc1;
+    public final boolean misc1JustPressed;
+    /**
+     * Xbox Elite paddle P1
+     */
+    public final boolean paddle1;
+    public final boolean paddle1JustPressed;
+    /**
+     * Xbox Elite paddle P3
+     */
+    public final boolean paddle2;
+    public final boolean paddle2JustPressed;
+    /**
+     * Xbox Elite paddle P2
+     */
+    public final boolean paddle3;
+    public final boolean paddle3JustPressed;
+    /**
+     * Xbox Elite paddle P4
+     */
+    public final boolean paddle4;
+    public final boolean paddle4JustPressed;
+    /**
+     * PS4/PS5 touchpad button
+     */
+    public final boolean touchpadButton;
+    public final boolean touchpadButtonJustPressed;
+
+    /**
      * Return a controller state based on the current state of the passed controller.
      *
      * If the controller a disconnected mid-read, the disconnected controller is returned, and the
@@ -293,6 +324,12 @@ public final class ControllerState implements Serializable {
         dpadDownJustPressed = c.isButtonJustPressed(ControllerButton.DPAD_DOWN);
         dpadLeftJustPressed = c.isButtonJustPressed(ControllerButton.DPAD_LEFT);
         dpadRightJustPressed = c.isButtonJustPressed(ControllerButton.DPAD_RIGHT);
+        misc1JustPressed = c.isButtonJustPressed(ControllerButton.BUTTON_MISC1);
+        paddle1JustPressed = c.isButtonJustPressed(ControllerButton.BUTTON_PADDLE1);
+        paddle2JustPressed = c.isButtonJustPressed(ControllerButton.BUTTON_PADDLE2);
+        paddle3JustPressed = c.isButtonJustPressed(ControllerButton.BUTTON_PADDLE3);
+        paddle4JustPressed = c.isButtonJustPressed(ControllerButton.BUTTON_PADDLE4);
+        touchpadButtonJustPressed = c.isButtonJustPressed(ControllerButton.BUTTON_TOUCHPAD);
 
         a = c.isButtonPressed(ControllerButton.A);
         b = c.isButtonPressed(ControllerButton.B);
@@ -307,6 +344,12 @@ public final class ControllerState implements Serializable {
         dpadDown = c.isButtonPressed(ControllerButton.DPAD_DOWN);
         dpadLeft = c.isButtonPressed(ControllerButton.DPAD_LEFT);
         dpadRight = c.isButtonPressed(ControllerButton.DPAD_RIGHT);
+        misc1 = c.isButtonPressed(ControllerButton.BUTTON_MISC1);
+        paddle1 = c.isButtonPressed(ControllerButton.BUTTON_PADDLE1);
+        paddle2 = c.isButtonPressed(ControllerButton.BUTTON_PADDLE2);
+        paddle3 = c.isButtonPressed(ControllerButton.BUTTON_PADDLE3);
+        paddle4 = c.isButtonPressed(ControllerButton.BUTTON_PADDLE4);
+        touchpadButton = c.isButtonPressed(ControllerButton.BUTTON_TOUCHPAD);
     }
 
     private ControllerState() {
@@ -341,6 +384,12 @@ public final class ControllerState implements Serializable {
         dpadDownJustPressed = false;
         dpadLeftJustPressed = false;
         dpadRightJustPressed = false;
+        misc1JustPressed = false;
+        paddle1JustPressed = false;
+        paddle2JustPressed = false;
+        paddle3JustPressed = false;
+        paddle4JustPressed = false;
+        touchpadButtonJustPressed = false;
 
         a = false;
         b = false;
@@ -355,5 +404,11 @@ public final class ControllerState implements Serializable {
         dpadDown = false;
         dpadLeft = false;
         dpadRight = false;
+        misc1 = false;
+        paddle1 = false;
+        paddle2 = false;
+        paddle3 = false;
+        paddle4 = false;
+        touchpadButton = false;
     }
 }

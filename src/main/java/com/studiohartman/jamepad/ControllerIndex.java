@@ -189,9 +189,7 @@ public final class ControllerIndex {
     public float getAxisState(ControllerAxis toCheck) throws ControllerUnpluggedException {
         ensureConnected();
 
-        float toReturn = nativeCheckAxis(controllerPtr, toCheck.ordinal()) / AXIS_MAX_VAL;
-
-        return toReturn;
+        return nativeCheckAxis(controllerPtr, toCheck.ordinal()) / AXIS_MAX_VAL;
     }
     private native int nativeCheckAxis(long controllerPtr, int axisIndex); /*
         SDL_GameControllerUpdate();
