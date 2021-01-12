@@ -288,10 +288,10 @@ public final class ControllerIndex {
      */
     public ControllerPowerLevel getPowerLevel() throws ControllerUnpluggedException {
         ensureConnected();
-        return ControllerPowerLevel.valueOf(nativeGetPowerLevel());
+        return ControllerPowerLevel.valueOf(nativeGetPowerLevel(controllerPtr));
     }
 
-    private native int nativeGetPowerLevel(); /*
+    private native int nativeGetPowerLevel(long controllerPtr); /*
         SDL_Joystick* joystick = SDL_GameControllerGetJoystick((SDL_GameController*) controllerPtr);
         return SDL_JoystickCurrentPowerLevel(joystick);
     */
