@@ -298,6 +298,13 @@ public class ControllerManager {
         return JNI_TRUE;
     */
 
+    /**
+     * @return last error message logged by the native lib. Use this for debugging purposes.
+     */
+    public native String getLastNativeError(); /*
+        return SDL_GetError();
+    */
+
     private boolean verifyInitialized() throws IllegalStateException {
         if(!isInitialized) {
             throw new IllegalStateException("SDL_GameController is not initialized!");
