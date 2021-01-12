@@ -248,6 +248,7 @@ public final class ControllerIndex {
         }
         return controllerName;
     }
+
     private native String nativeGetName(long controllerPtr); /*
         SDL_GameController* pad = (SDL_GameController*) controllerPtr;
         return env->NewStringUTF(SDL_GameControllerName(pad));
@@ -269,7 +270,7 @@ public final class ControllerIndex {
     /**
      * Sets player index. At the time being, this doesn't seem to change the indication lights on
      * a controller on Windows, Linux and Mac, but only an internal representation index.
-     * @param index
+     * @param index index to set
      */
     public void setPlayerIndex(int index) throws ControllerUnpluggedException {
         ensureConnected();
@@ -279,6 +280,20 @@ public final class ControllerIndex {
     private native void nativeSetPlayerIndex(long controllerPtr, int index); /*
         SDL_GameController* pad = (SDL_GameController*) controllerPtr;
         return SDL_GameControllerSetPlayerIndex(pad, index);
+    */
+
+    /**
+     * @return current power level of game controller, see {@link ControllerPowerLevel} enum values
+     * @throws ControllerUnpluggedException If the controller is not connected
+     */
+    public ControllerPowerLevel getPowerLevel() throws ControllerUnpluggedException {
+        ensureConnected();
+        return ControllerPowerLevel.valueOf(nativeGetPowerLevel());
+    }
+
+    private native int nativeGetPowerLevel(); /*
+        SDL_Joystick* joystick = SDL_GameControllerGetJoystick((SDL_GameController*) controllerPtr);
+        return SDL_JoystickCurrentPowerLevel(joystick);
     */
 
     /**
