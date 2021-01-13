@@ -29,6 +29,7 @@ public class ControllerManager {
     SDL_Event event;
     */
 
+    private final Configuration configuration;
     private String mappingsPath;
     private boolean isInitialized;
     private ControllerIndex[] controllers;
@@ -38,28 +39,29 @@ public class ControllerManager {
      * https://github.com/gabomdq/SDL_GameControllerDB
      */
     public ControllerManager() {
-        this(4, "/gamecontrollerdb.txt");
+        this(new Configuration(), "/gamecontrollerdb.txt");
     }
 
     /**
      * Constructor. Uses built-in mappings from here: https://github.com/gabomdq/SDL_GameControllerDB
      *
-     * @param maxNumControllers The number of controllers this ControllerManager can deal with
+     * @param configuration see {@link Configuration and its fields}
      */
-    public ControllerManager(int maxNumControllers) {
-        this(maxNumControllers, "/gamecontrollerdb.txt");
+    public ControllerManager(Configuration configuration) {
+        this(configuration, "/gamecontrollerdb.txt");
     }
 
     /**
      * Constructor.
      *
      * @param mappingsPath The path to a file containing SDL controller mappings.
-     * @param maxNumControllers The number of controller this ControllerManager can deal with
+     * @param configuration see {@link Configuration and its fields}
      */
-    public ControllerManager(int maxNumControllers, String mappingsPath) {
+    public ControllerManager(Configuration configuration, String mappingsPath) {
+        this.configuration = configuration;
         this.mappingsPath = mappingsPath;
         isInitialized = false;
-        controllers = new ControllerIndex[maxNumControllers];
+        controllers = new ControllerIndex[configuration.maxNumControllers];
 
         new SharedLibraryLoader().load("jamepad");
     }
@@ -76,7 +78,7 @@ public class ControllerManager {
         }
 
         //Initialize SDL
-        if (!nativeInitSDLGamepad()) {
+        if (!nativeInitSDLGamepad(!configuration.useRawInput)) {
             throw new IllegalStateException("Failed to initialize SDL in native method!");
         } else {
             isInitialized = true;
@@ -97,8 +99,10 @@ public class ControllerManager {
             controllers[i] = new ControllerIndex(i);
         }
     }
-    private native boolean nativeInitSDLGamepad(); /*
-        SDL_SetHint(SDL_HINT_JOYSTICK_RAWINPUT, "0");
+    private native boolean nativeInitSDLGamepad(boolean disableRawInput); /*
+        if (disableRawInput) {
+            SDL_SetHint(SDL_HINT_JOYSTICK_RAWINPUT, "0");
+        }
 
         if (SDL_Init(SDL_INIT_EVENTS | SDL_INIT_JOYSTICK | SDL_INIT_GAMECONTROLLER) != 0) {
             printf("NATIVE METHOD: SDL_Init failed: %s\n", SDL_GetError());
