@@ -63,7 +63,9 @@ public class ControllerManager {
         isInitialized = false;
         controllers = new ControllerIndex[configuration.maxNumControllers];
 
-        new SharedLibraryLoader().load("jamepad");
+        if (configuration.loadNativeLibrary) {
+            new SharedLibraryLoader().load("jamepad");
+        }
     }
 
     /**

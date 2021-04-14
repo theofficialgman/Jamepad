@@ -16,4 +16,10 @@ public class Configuration {
      * need to use more than four XInput controllers at once. Comes with drawbacks.
      */
     public boolean useRawInput = false;
+
+    /**
+     * Disable this to skip loading of the native library. Can be useful if an application wants
+     * to use a loader other than {@link com.badlogic.gdx.utils.SharedLibraryLoader}.
+     */
+    public boolean loadNativeLibrary = true;
 }
