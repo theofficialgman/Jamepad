@@ -268,6 +268,23 @@ public final class ControllerIndex {
     */
 
     /**
+     * Returns the instance ID of the current controller, which uniquely identifies
+     * the device from the time it is connected until it is disconnected.
+     *
+     * @return The instance ID of the current controller
+     * @throws ControllerUnpluggedException If the controller is not connected
+     */
+    public int getDeviceInstanceID() throws ControllerUnpluggedException {
+        ensureConnected();
+        return nativeGetDeviceInstanceID(controllerPtr);
+    }
+
+    private native int nativeGetDeviceInstanceID(long controllerPtr); /*
+        SDL_Joystick* joystick = SDL_GameControllerGetJoystick((SDL_GameController*) controllerPtr);
+        return SDL_JoystickInstanceID(joystick);
+     */
+
+    /**
      * @return player index if set and supported, -1 otherwise
      */
     public int getPlayerIndex() throws ControllerUnpluggedException {

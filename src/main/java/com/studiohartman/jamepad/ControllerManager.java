@@ -249,15 +249,18 @@ public class ControllerManager {
      *
      * If there hasn't been a change in whether controller are connected or not, nothing will happen.
      *
+     * @return True if the controller list was refreshed, false otherwise
      * @throws IllegalStateException if Jamepad was not initialized
      */
-    public void update() {
+    public boolean update() {
         verifyInitialized();
         if (nativeControllerConnectedOrDisconnected()) {
             for (int i = 0; i < controllers.length; i++) {
                 controllers[i].reconnectController();
             }
+            return true;
         }
+        return false;
     }
     private native boolean nativeControllerConnectedOrDisconnected(); /*
         SDL_JoystickUpdate();
