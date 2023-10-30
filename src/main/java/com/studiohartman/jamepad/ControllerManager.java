@@ -3,6 +3,8 @@ package com.studiohartman.jamepad;
 import com.badlogic.gdx.utils.SharedLibraryLoader;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -283,6 +285,7 @@ public class ControllerManager {
     public void addMappingsFromFile(String path) throws IOException, IllegalStateException {
         InputStream source = getClass().getResourceAsStream(path);
         if(source==null) source = ClassLoader.getSystemResourceAsStream(path);
+        if(source==null && new File(path).exists()) source = new FileInputStream(path);
         if(source==null) throw new IOException("Cannot open resource from classpath "+path);
 
         if(configuration.loadDatabaseInMemory) {
@@ -294,6 +297,7 @@ public class ControllerManager {
             while((read = source.read(data, 0, data.length)) != -1) {
                 buffer.write(data, 0, read);
             }
+            source.close();
             
             byte[] b = buffer.toByteArray();
             if(!nativeAddMappingsFromBuffer(b, b.length)) {
